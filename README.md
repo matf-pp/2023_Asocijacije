@@ -4,8 +4,7 @@ Aplikacija za pomoć u igranju igre "Asocijacije" koja se igra u tri faze.
 
 ## Ideja kako bi izgledao projekat
 
-[Slika](../../../Downloads/Merged_document.jpg)
-
+[Slika](Izgled_Aplikacije.jpg)
 ## Klase i Baza
 
 Backend deo aplikacije:
