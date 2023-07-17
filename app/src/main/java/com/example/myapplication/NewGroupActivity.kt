@@ -23,6 +23,7 @@ class NewGroupActivity : AppCompatActivity() {
         }
 
         val editText = findViewById<EditText>(R.id.newTeamName)
+        val textViewError = findViewById<TextView>(R.id.emptyError)
 
         val numbers = resources.getStringArray(R.array.Numbers)
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, numbers)
@@ -31,21 +32,28 @@ class NewGroupActivity : AppCompatActivity() {
 
         val btnNext: Button = findViewById(R.id.btnNextNewGroup)
         btnNext.setOnClickListener(){
-            //mozda bi bilo bolje da ova grupa bude deklarisana u novoj klasi koja ce imati tekuce
-            //vrednosti jer je to ona ekipa za koju ce se igrati igra,a potrebna nam je i u sledecem
-            //activity-ju
-            val newGroup : PlayerGroup = PlayerGroup("")
-            val groupName = editText.text.toString()
-            newGroup.setPGName(groupName)
+            if(editText.text.isEmpty()){
+                textViewError.text = "Unesite ime tima!"
+            }else {
+                if (autocompleteTV.text.isEmpty()) {
+                    textViewError.text = "Unesite broj igraca!"
+                }else{
+                    val groupName = editText.text.toString()
+                    val newGroup = PlayerGroup(groupName)
+                    var numberOfPlayers :Int
+                    autocompleteTV.setOnItemClickListener { parent, view, position, id ->
+                        val selectedGroup = parent.getItemAtPosition(position)
+                        numberOfPlayers = selectedGroup.toString().toInt()
+                        //newGroup.setPGNumOfPl(numberOfPlayers
+                    }
 
-            autocompleteTV.setOnItemClickListener { parent, view, position, id ->
-                val selectedGroup = parent.getItemAtPosition(position)
-                val numberOfPlayers = selectedGroup.toString().toInt()
+                    val bundle = Bundle()
+                    bundle.putString("id", groupName)
+                    val intent = Intent(this, AddPlayersActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }
             }
-            //newGroup.setPGNumOfPl(numberOfPlayers)
-
-            val intent = Intent(this, AddPlayersActivity::class.java)
-            startActivity(intent)
         }
     }
 }

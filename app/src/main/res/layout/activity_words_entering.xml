@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".AddPlayersActivity">
+    tools:context=".WordsEnteringActivity">
 
     <Button
 
@@ -24,10 +24,10 @@
         app:layout_constraintVertical_bias="0.024" />
 
     <TextView
-        android:id="@+id/labelAddPlayers"
+        android:id="@+id/tvPlayerEntering"
         android:layout_width="179dp"
         android:layout_height="53dp"
-        android:text="Unesite igrace: "
+        android:hint = "Ne zaboravi"
         android:textColor="@color/buttons"
         android:textSize="25sp"
         android:textAlignment = "center"
@@ -38,10 +38,10 @@
         app:layout_constraintVertical_bias="0.098" />
 
     <EditText
-        android:id="@+id/eTAddPlayers"
+        android:id="@+id/eTAddWords"
         android:layout_width="257dp"
         android:layout_height="70dp"
-        android:hint="Unesite ime igraca: "
+        android:hint="Unesite rec: "
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/buttons"
@@ -54,7 +54,7 @@
         app:layout_constraintVertical_bias="0.208" />
 
     <Button
-        android:id="@+id/btnOK"
+        android:id="@+id/btnOK2"
         android:layout_width="83dp"
         android:layout_height="72dp"
         android:layout_marginStart="17dp"
@@ -65,15 +65,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toEndOf="@+id/eTAddPlayers"
+        app:layout_constraintStart_toEndOf="@+id/eTAddWords"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.458" />
 
     <TextView
-        android:id="@+id/addedPlayers"
+        android:id="@+id/addedWords"
         android:layout_width="343dp"
         android:layout_height="243dp"
-        android:hint="Uneti igraci"
+        android:hint="Unete reci"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +83,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/numberOfPlayersError"
+        android:id="@+id/numberOfEnteredWordsError"
         android:layout_width="343dp"
         android:layout_height="70dp"
         android:textSize="20sp"
@@ -99,18 +99,18 @@
     <Button
 
         android:id="@+id/btnNextAddPlayers"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:textAllCaps="true"
+        android:layout_width="286dp"
+        android:layout_height="86dp"
+        android:text="sledeci igrac"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textSize="20sp"
-        android:text = "dalje"
         app:cornerRadius="@android:dimen/notification_large_icon_height"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.913"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.959" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
