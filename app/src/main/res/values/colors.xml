@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name ="buttons">#4B0857</color>
     <color name ="background">#C582D1</color>
+    <color name = "error"> #FF0000</color>color>
 </resources>
