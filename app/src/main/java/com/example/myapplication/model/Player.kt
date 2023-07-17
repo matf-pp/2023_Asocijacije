@@ -36,8 +36,8 @@ class Player(private val name: String) {
     fun winsIncrease(){
         numOfWins++
     }
-    fun correctAnswersIncrease(correctInRound: Int) {
-        numOfCorrectAnswers += correctInRound
+    fun correctAnswersIncrease() {
+        numOfCorrectAnswers++
     }
     fun resetWords(){
         words = mutableListOf()
@@ -59,8 +59,9 @@ fun main(){
     lista.add(p1)
     lista.add(p2)
     p1.winsIncrease()
-    p2.correctAnswersIncrease(5)
-
+    p2.correctAnswersIncrease()
+    println(p1.getNumOfWins())
+    println(p2.getNumOfCorrectAnswers())
 }
 
 

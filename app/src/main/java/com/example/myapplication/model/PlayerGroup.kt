@@ -4,21 +4,18 @@ package com.example.myapplication.model
 //import com.example.myapplication.model.Player
 //import com.example.myapplication.model.winsComparator
 //import com.example.myapplication.model.answersComparator
-//ove su za serijalizaciju tj. cuvanje u jsonu
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.encodeToString
-import java.io.File
 
 @Serializable
 class PlayerGroup(private var name: String) {
+    private var numOfPlayers : Int = 0
     private var plGroup = mutableListOf<Player>()
     var listOfPairs = mutableListOf<Pair<Player, Player>>()
 
     //kontrola plGroup-a
     fun add(player: Player){
         plGroup.add(player)
+        numOfPlayers++
     }
     //brisanje clana iz grupe mi nema smisla posto kao jednom dodat clan ce uvek ostati u grupi
 
@@ -45,7 +42,6 @@ class PlayerGroup(private var name: String) {
 
     //fje za rad sa igracima
     fun makeRandomPairs(){
-        listOfPairs = mutableListOf<Pair<Player, Player>>()
         for(player in plGroup) {
             while (!player.isPaired()) {
                 val random = (0 until plGroup.size).random()
@@ -74,21 +70,8 @@ class PlayerGroup(private var name: String) {
     }
 }
 
-//fje za json, ne cuvaju iz nekog razloga u jsonu i nmp kako da prorade
-//fun PGToJson(players : PlayerGroup, filepath: String){
-//    val jsonContent = Json.encodeToString(players)
-//    File(filepath).writeText(jsonContent)
-//}
-//fun JsonToPG(filepath: String) : PlayerGroup{
-//    val jsonContent = File(filepath).readText()
-//    return Json.decodeFromString(jsonContent)
-//}
-
 //main za testiranje
-//fun main(){
-//    val pg1 = PlayerGroup("PG1")
-//    val filepath = "playerGroups.json"
-//
-//    PGToJson(pg1, filepath)
-//
-//}
+fun main(){
+    val pg1 = PlayerGroup("PG1")
+
+}

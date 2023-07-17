@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.myapplication.db.DatabaseServiceProvider
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,5 +21,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, InstructionsActivity::class.java)
             startActivity(intent)
         }
+
+        //pocetni podaci za testiranje
+        DatabaseServiceProvider.db.dataInit()
+
     }
 }
