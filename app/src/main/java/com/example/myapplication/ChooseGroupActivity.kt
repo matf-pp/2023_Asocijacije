@@ -41,11 +41,11 @@ class ChooseGroupActivity : AppCompatActivity() {
         val tVerror = findViewById<TextView>(R.id.chooseGroupError)
 
         val btnChoose: Button = findViewById(R.id.btnChooseThisGroup)
-        btnChoose.setOnClickListener(){
+        btnChoose.setOnClickListener() {
 
-            if(autocompleteTV.text.toString().isEmpty()){
+            if (autocompleteTV.text.toString().isEmpty()) {
                 tVerror.text = "Izaberite tim!"
-            }else{
+            } else {
                 val intent = Intent(this, GroupInfoActivity::class.java)
                 var currentGame = Game()
                 currentGame.setPlayerGroup(currentPGroup)
@@ -53,8 +53,9 @@ class ChooseGroupActivity : AppCompatActivity() {
                 //intent.putExtra("gameData", currentGame)
                 startActivity(intent)
             }
-
         }
+
+
 
 
         val btnNewGroup: Button = findViewById(R.id.btnNewGroup)

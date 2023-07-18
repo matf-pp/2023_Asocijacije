@@ -18,6 +18,6 @@ class PreviousGamesActivity : AppCompatActivity() {
         }
 
         val textView = findViewById<TextView>(R.id.previosGamesList)
-        //textView.text = set previous games list
+        // TODO: textView.text = set previous game list using group information from database and sort
     }
 }
