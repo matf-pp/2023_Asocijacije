@@ -29,6 +29,10 @@ class PlayerGroup(private var name: String) {
         return players
     }
 
+    fun getNumOfPlayers() : Int {
+        return numOfPlayers
+    }
+
     //seteri
     fun setPGName(pgName: String){
         name = pgName

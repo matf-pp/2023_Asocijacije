@@ -6,7 +6,6 @@ class Player(private val name: String) {
     private var numOfWins: Int = 0
     private var paired: Boolean = false
     private var numOfCorrectAnswers: Int = 0
-    private var words =  mutableListOf<String>()
 
     //geteri
     fun getName(): String{
@@ -18,21 +17,9 @@ class Player(private val name: String) {
     fun getNumOfCorrectAnswers(): Int{
         return numOfCorrectAnswers
     }
-    fun getWords() : List<String>{
-        return words
-    }
 
     //seteri
-    fun setWords(newWords: List<String>){
-        resetWords()
-        for(word in newWords){
-            words.add(word)
-        }
-    }
 
-    fun addWord(word : String) {
-        words.add(word)
-    }
 
     fun setPaired(b: Boolean){
         paired = b
@@ -43,9 +30,6 @@ class Player(private val name: String) {
     }
     fun correctAnswersIncrease() {
         numOfCorrectAnswers++
-    }
-    private fun resetWords(){
-        words = mutableListOf()
     }
     override fun toString(): String {
         return this.getName()

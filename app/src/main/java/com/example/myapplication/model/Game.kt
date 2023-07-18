@@ -6,7 +6,7 @@ class Game : Serializable {
     //ne moze da se zove playerGroup zbog JVM, ima isti naziv za neki modul
     private var plGroup : PlayerGroup = PlayerGroup("")
     private var numOfWordsPerPlayer : Int = 0
-    private var wordsBank = mutableListOf<String>()
+    private var wordBank = mutableListOf<String>()
     private var currentPlayer : Player = Player("")
     private var currentGamePhase : Int = 1
     private var listOfPairs = mutableListOf<Pair<Player, Player>>()
@@ -17,6 +17,10 @@ class Game : Serializable {
 
     fun getPairs() : MutableList<Pair<Player, Player>> {
         return listOfPairs
+    }
+
+    fun getWords() : MutableList<String> {
+        return wordBank
     }
 
     fun setPlayerGroup(pg: PlayerGroup) {
@@ -30,6 +34,8 @@ class Game : Serializable {
     fun setListOfPairs(list : MutableList<Pair<Player, Player>> ) {
         listOfPairs = list
     }
+
+
 
     fun makeRandomPairs(){
         val list = mutableListOf<Pair<Player, Player>>()
@@ -63,9 +69,8 @@ class Game : Serializable {
         return pom
     }
 
-    fun sendWordsToWordBank(player: Player) {
-        for (w in player.getWords())
-            wordsBank.add(w)
+    fun addWord(word : String) {
+        wordBank.add(word)
     }
 //ove 2 fje mogu posluziti u BetweenPlayersActivity
     fun pairedWith (player: Player) : Player {
