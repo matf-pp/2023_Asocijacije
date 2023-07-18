@@ -10,6 +10,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.myapplication.db.DatabaseServiceProvider
 import com.example.myapplication.model.Game
 import java.io.Serializable
 
@@ -24,31 +25,24 @@ class GroupInfoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        //inicijalizacija objekata
+        //deklaracija objekata
         val tVListOfPairs = findViewById<TextView>(R.id.listOfPairs)
         val numbers = resources.getStringArray(R.array.NumOfWords)
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, numbers)
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView3)
         autocompleteTV.setAdapter(arrayAdapter)
 
+        var game:Game = DatabaseServiceProvider.db.getGame()
+        game.makeRandomPairs()
+        tVListOfPairs.text = game.getPairs().toString()
 
+        //podesavanje broja reci po igracu
 
-
-
-        //preuzimanje iz proslog activity-ja:
-        //ne radi ovo :(((((
-
-       /* fun <T : Serializable?> getSerializable(activity: Activity, name: String, clazz: Class<T>): T
-        {
-            return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                activity.intent.getSerializableExtra(name, clazz)!!
-            else
-                activity.intent.getSerializableExtra(name) as T
+        autocompleteTV.setOnItemClickListener { parent, view, position, id ->
+            val selectedNumOfWords = parent.getItemAtPosition(position)
+            val numOfWords = selectedNumOfWords.toString().toInt()
+            game.setNumOfWordsPerPlayer(numOfWords)
         }
-        val game = getSerializable(this,"gameData",Game::class.java)*/
-        //game.makeRandomPairs()
-        //tVListOfPairs.text = game.listOfPairs.toString()
-
 
         //dugmici
         val tvError = findViewById<TextView>(R.id.numOfWordsError)
@@ -63,7 +57,6 @@ class GroupInfoActivity : AppCompatActivity() {
         }
 
 
-
         val btnPreviousGames: Button = findViewById(R.id.btnPreviousGames)
         btnPreviousGames.setOnClickListener{
             val intent = Intent(this, PreviousGamesActivity::class.java)
@@ -72,7 +65,8 @@ class GroupInfoActivity : AppCompatActivity() {
 
         val btnChangePairs: Button = findViewById(R.id.btnChangePairs)
         btnChangePairs.setOnClickListener{
-            //TODO get from database game info and  shuffle :)
+            game.makeRandomPairs()
+            tVListOfPairs.text = game.getPairs().toString()
         }
     }
 }
