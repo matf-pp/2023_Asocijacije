@@ -1,5 +1,6 @@
 package com.example.myapplication.db
 
+import com.example.myapplication.model.Game
 import com.example.myapplication.model.Player
 import com.example.myapplication.model.PlayerGroup
 
@@ -8,7 +9,7 @@ private var firstTimeIn: Boolean = true
 class InMemoryDatabaseService : DatabaseService {
 
     var playerGroupList : MutableList<PlayerGroup> = mutableListOf()
-
+    var currentGame : Game = Game()
     override fun connect(): DatabaseService {
         return this
     }
@@ -18,51 +19,62 @@ class InMemoryDatabaseService : DatabaseService {
     }
 
     override fun getPlayerGroupNames(): MutableList<String> {
-        var pom : MutableList<String> = mutableListOf()
-        for (plGroup in this.playerGroupList)
+        val pom : MutableList<String> = mutableListOf()
+        for (plGroup in playerGroupList)
             pom.add(plGroup.getPGName())
         return pom
     }
 
     override fun addPlayerGroup(playerGroup: PlayerGroup) {
         playerGroupList.add(playerGroup)
-        println("AddPlayerGroup function: ${playerGroup.getPGName()}, ${playerGroup.getPGList()}" )
     }
 
     override fun getPlayerGroup(name: String) : PlayerGroup {
-        return this.playerGroupList.single { it.getPGName() == name }
+        return playerGroupList.single { it.getPGName() == name }
     }
 
     override fun removePlayerGroup(playerGroup: PlayerGroup) {
         TODO("Not yet implemented")
     }
 
+    override fun setGame(game: Game) {
+        currentGame = game
+    }
+
+    override fun getGame(): Game {
+        return currentGame
+    }
+
     override fun dataInit() {
         if(firstTimeIn) {
-
-            var playerGroupAsocijacije = PlayerGroup("Asocijacije")
-            var tanja = Player("tanja")
-            var anja = Player("anja")
-            var vaske = Player("vaske")
-            var zile = Player("zile")
+            val playerGroupAsocijacije = PlayerGroup("Asocijacije")
+            val tanja = Player("tanja")
+            val anja = Player("anja")
+            val vaske = Player("vaske")
+            val zile = Player("zile")
             playerGroupAsocijacije.add(tanja)
             playerGroupAsocijacije.add(anja)
             playerGroupAsocijacije.add(vaske)
             playerGroupAsocijacije.add(zile)
 
-            var playerGroupMatf = PlayerGroup("Matf")
-            var mila = Player("mila")
-            var irina = Player("irina")
-            var milos = Player("milos")
-            var tina = Player("tina")
+            //morala sam da napravim nove instance za tanju, anju,.., da im se ne bi sabirale pobjede i iz grupe Asocijacije
+            val playerGroupMatf = PlayerGroup("Matf")
+            val tanja2 = Player("tanja")
+            val anja2 = Player("anja")
+            val vaske2 = Player("vaske")
+            val zile2 = Player("zile")
+            val mila = Player("mila")
+            val irina = Player("irina")
+            val milos = Player("milos")
+            val tina = Player("tina")
             playerGroupMatf.add(mila)
             playerGroupMatf.add(irina)
             playerGroupMatf.add(milos)
             playerGroupMatf.add(tina)
-            playerGroupMatf.add(tanja)
-            playerGroupMatf.add(anja)
-            playerGroupMatf.add(vaske)
-            playerGroupMatf.add(zile)
+            playerGroupMatf.add(tanja2)
+            playerGroupMatf.add(anja2)
+            playerGroupMatf.add(vaske2)
+            playerGroupMatf.add(zile2)
 
             DatabaseServiceProvider.db.addPlayerGroup(playerGroupMatf)
             DatabaseServiceProvider.db.addPlayerGroup(playerGroupAsocijacije)

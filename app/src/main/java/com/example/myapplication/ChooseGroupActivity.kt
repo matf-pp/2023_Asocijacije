@@ -10,7 +10,6 @@ import android.widget.TextView
 import com.example.myapplication.db.DatabaseServiceProvider
 import com.example.myapplication.model.Game
 import com.example.myapplication.model.PlayerGroup
-import java.io.Serializable
 
 class ChooseGroupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +35,7 @@ class ChooseGroupActivity : AppCompatActivity() {
             //clanovi tima, samo sredi kako ce ih ispisati
             val textView = findViewById<TextView>(R.id.teamMembers)
             currentPGroup = DatabaseServiceProvider.db.getPlayerGroup(tekst)
-            textView.text = currentPGroup.getPGList().toString()
+            textView.text = currentPGroup.getPlayers().toString()
         }
 
         val tVerror = findViewById<TextView>(R.id.chooseGroupError)

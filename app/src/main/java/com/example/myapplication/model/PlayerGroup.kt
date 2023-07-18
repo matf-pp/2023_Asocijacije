@@ -9,11 +9,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 class PlayerGroup(private var name: String) {
     private var numOfPlayers : Int = 0
-    private var plGroup = mutableListOf<Player>()
+    private var players = mutableListOf<Player>()
 
     //kontrola plGroup-a
     fun add(player: Player){
-        plGroup.add(player)
+        players.add(player)
         numOfPlayers++
     }
     //brisanje clana iz grupe mi nema smisla posto kao jednom dodat clan ce uvek ostati u grupi
@@ -22,9 +22,9 @@ class PlayerGroup(private var name: String) {
     fun getPGName(): String{
         return name
     }
-    fun getPGList(): List<Player>{
+    fun getPlayers(): MutableList<Player>{
         var players = mutableListOf<Player>()
-        for(player in plGroup)
+        for(player in this.players)
             players.add(player)
         return players
     }
@@ -34,9 +34,9 @@ class PlayerGroup(private var name: String) {
         name = pgName
     }
     fun setPGList(pgList: List<Player>){
-        plGroup = mutableListOf()
+        players = mutableListOf()
         for(player in pgList)
-            plGroup.add(player)
+            players.add(player)
     }
 
     //fje za rad sa igracima
@@ -44,11 +44,12 @@ class PlayerGroup(private var name: String) {
     fun makeNonRandomPairs() {
         //ako bude moglo, dodacemo (mnogo ubijam glavu sta da budu parametri i kako da ne brisem listOfPairs)
     }
-    fun sortByWins() : List<Player>{
-        val sortedPLGroup = mutableListOf<Player>()
-        for(player in plGroup)
-            sortedPLGroup.add(player)
-        return sortedPLGroup.sortedWith(winsComparator)
+    fun sortedByWins() : List<Player>{
+        return players.sortedWith(winsComparator)
+    }
+
+    override fun toString(): String {
+        return this.players.toString()
     }
 
 }

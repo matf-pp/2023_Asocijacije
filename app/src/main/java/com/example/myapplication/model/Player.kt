@@ -29,6 +29,11 @@ class Player(private val name: String) {
             words.add(word)
         }
     }
+
+    fun addWord(word : String) {
+        words.add(word)
+    }
+
     fun setPaired(b: Boolean){
         paired = b
     }
@@ -39,7 +44,7 @@ class Player(private val name: String) {
     fun correctAnswersIncrease() {
         numOfCorrectAnswers++
     }
-    fun resetWords(){
+    private fun resetWords(){
         words = mutableListOf()
     }
     override fun toString(): String {
@@ -53,9 +58,9 @@ class Player(private val name: String) {
 
 //main metod za testiranje fja
 fun main(){
-    var p1 = Player("P1")
-    var p2 = Player("P2")
-    var lista = mutableListOf<Player>()
+    val p1 = Player("P1")
+    val p2 = Player("P2")
+    val lista = mutableListOf<Player>()
     lista.add(p1)
     lista.add(p2)
     p1.winsIncrease()
