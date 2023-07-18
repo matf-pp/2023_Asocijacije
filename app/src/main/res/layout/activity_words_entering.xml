@@ -9,7 +9,7 @@
 
     <Button
 
-        android:id="@+id/btnBackAddPlayers"
+        android:id="@+id/btnBackWordEntering"
         android:text="."
         android:layout_width="74dp"
         android:layout_height="79dp"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.024" />
 
     <TextView
-        android:id="@+id/tvPlayerEntering"
+        android:id="@+id/tvCurPlayerEntering"
         android:layout_width="179dp"
         android:layout_height="53dp"
         android:hint = "Ne zaboravi"
@@ -98,7 +98,7 @@
 
     <Button
 
-        android:id="@+id/btnNextAddPlayers"
+        android:id="@+id/btnNextPlayer"
         android:layout_width="286dp"
         android:layout_height="86dp"
         android:text="sledeci igrac"
