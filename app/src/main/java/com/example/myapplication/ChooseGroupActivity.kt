@@ -49,8 +49,7 @@ class ChooseGroupActivity : AppCompatActivity() {
                 val intent = Intent(this, GroupInfoActivity::class.java)
                 var currentGame = Game()
                 currentGame.setPlayerGroup(currentPGroup)
-                //ne radi slanje instance klase :(
-                //intent.putExtra("gameData", currentGame)
+                DatabaseServiceProvider.db.setGame(currentGame)
                 startActivity(intent)
             }
         }

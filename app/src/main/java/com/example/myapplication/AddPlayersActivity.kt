@@ -73,16 +73,11 @@ class AddPlayersActivity : AppCompatActivity() {
             if(clickCount!=numOfPl) {
                 textViewError.text = "Nema dovoljno igraca!"
             }else{
-                val intent = Intent(this, GroupInfoActivity::class.java)
+                val intent = Intent(this, ChooseGroupActivity::class.java)
                 startActivity(intent)
                 //dodamo currentGroup u bazu:
                 DatabaseServiceProvider.db.addPlayerGroup(currentGroup)
             }
         }
-
-
-
-        //nista ne mogu da testiram jer ne vidim dugme :) nadam se da radi
-
     }
 }

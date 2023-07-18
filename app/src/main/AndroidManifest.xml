@@ -13,6 +13,18 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".RankingListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TimerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BetweenPhasesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BetweenPlayersActivity"
+            android:exported="false" />
+        <activity
             android:name=".WordsEnteringActivity"
             android:exported="false" />
         <activity
