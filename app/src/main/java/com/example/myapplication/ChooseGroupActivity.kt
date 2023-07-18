@@ -7,6 +7,10 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.TextView
+import com.example.myapplication.db.DatabaseServiceProvider
+import com.example.myapplication.model.Game
+import com.example.myapplication.model.PlayerGroup
+import java.io.Serializable
 
 class ChooseGroupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +24,8 @@ class ChooseGroupActivity : AppCompatActivity() {
 
 
         //vadicemo iz baze listu grupi
-        val existingGroups = resources.getStringArray(R.array.Groups)
+        var currentPGroup : PlayerGroup = PlayerGroup("")
+        val existingGroups = DatabaseServiceProvider.db.getPlayerGroupNames()
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, existingGroups)
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         autocompleteTV.setAdapter(arrayAdapter)
@@ -28,9 +33,10 @@ class ChooseGroupActivity : AppCompatActivity() {
             val selectedGroup = parent.getItemAtPosition(position)
             val tekst = selectedGroup.toString()
 
-            //ispisivacemo clanove ove grupe (vadicemo iz jsona) a ne ime ali za sad
+            //clanovi tima, samo sredi kako ce ih ispisati
             val textView = findViewById<TextView>(R.id.teamMembers)
-            textView.text = tekst
+            currentPGroup = DatabaseServiceProvider.db.getPlayerGroup(tekst)
+            textView.text = currentPGroup.getPGList().toString()
         }
 
         val tVerror = findViewById<TextView>(R.id.chooseGroupError)
@@ -42,6 +48,10 @@ class ChooseGroupActivity : AppCompatActivity() {
                 tVerror.text = "Izaberite tim!"
             }else{
                 val intent = Intent(this, GroupInfoActivity::class.java)
+                var currentGame = Game()
+                currentGame.setPlayerGroup(currentPGroup)
+                //ne radi slanje instance klase :(
+                //intent.putExtra("gameData", currentGame)
                 startActivity(intent)
             }
 

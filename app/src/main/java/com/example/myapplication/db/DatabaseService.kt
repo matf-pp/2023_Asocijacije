@@ -7,7 +7,7 @@ interface DatabaseService {
     fun getPlayerGroups() : MutableList<PlayerGroup>
     fun getPlayerGroupNames() : MutableList<String>
     fun addPlayerGroup (playerGroup: PlayerGroup)
-    fun getPlayerGroup (name: String)
+    fun getPlayerGroup (name: String) : PlayerGroup
     fun removePlayerGroup (playerGroup: PlayerGroup)
     fun dataInit()
 }

@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +10,10 @@ import android.widget.TextView
 import com.example.myapplication.model.PlayerGroup
 import com.example.myapplication.model.Player
 import com.example.myapplication.NewGroupActivity
+import com.example.myapplication.db.DatabaseServiceProvider
+
 class AddPlayersActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_players)
@@ -31,17 +35,23 @@ class AddPlayersActivity : AppCompatActivity() {
         //preuzimamo ime grupe i broj igraca iz prethodnog activity-ja
         val bundle = intent.extras
         var groupName = ""
+        var groupNum = 0
         if (bundle != null){
-           groupName = "id = ${bundle.getString("id")}"
+            groupName = bundle.getString("id").toString()
+            groupNum = bundle.getString("num").toString().toInt()
         }
+        //testiram da li se ispravno preuzelo:
+        //textView.text="$groupName \n $groupNum"
 
-        //currentGroup = FIND PlayerGroup with name groupName
+        var currentGroup : PlayerGroup = PlayerGroup(groupName)
+
+        //petlja sa brojacem groupNum
+        //dodamo igrace u currentGroup
+
         var clickCount : Int = 0
-        var numOfPl = 4 //numOfPl = currentGroup.numberOfPlayers
+        var numOfPl = groupNum
 
-
-
-        val btnOK : Button = findViewById(R.id.btnOK)
+        val btnOK: Button = findViewById(R.id.btnOK)
         btnOK.setOnClickListener(){
             val name = editText.text.toString()
             if(clickCount == numOfPl) {
@@ -49,8 +59,8 @@ class AddPlayersActivity : AppCompatActivity() {
             }else{
                 if(name.isNotBlank()){
                     val newPlayer = Player(name)
-                    textView.text = "${textView.text.toString()} \n $name"
-                    //currentGroup.add(newPlayer)
+                    textView.text = "${textView.text} \n $name"
+                    currentGroup.add(newPlayer)
                     clickCount+=1
                     editText.setText("")
                 }
@@ -65,9 +75,14 @@ class AddPlayersActivity : AppCompatActivity() {
             }else{
                 val intent = Intent(this, GroupInfoActivity::class.java)
                 startActivity(intent)
+                //dodamo currentGroup u bazu:
+                DatabaseServiceProvider.db.addPlayerGroup(currentGroup)
             }
         }
 
+
+
+        //nista ne mogu da testiram jer ne vidim dugme :) nadam se da radi
 
     }
 }

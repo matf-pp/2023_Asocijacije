@@ -1,42 +1,51 @@
 package com.example.myapplication.model
 
-class Game {
-    var playerGroup : PlayerGroup = PlayerGroup("")
+import com.example.myapplication.db.DatabaseServiceProvider
+import java.io.Serializable
+
+class Game : Serializable {
+    //ne moze da se zove playerGroup zbog JVM, ima isti naziv za neki modul
+    var plGroup : PlayerGroup = PlayerGroup("")
     private var numOfWordsPerPlayer : Int = 0
     private var words = mutableListOf<String>()
     private var currentPlayer : Player = Player("")
     private var currentGamePhase : Int = 1
     var listOfPairs = mutableListOf<Pair<Player, Player>>()
 
-
     fun getNumOfWordsPerPlayer() : Int {
         return numOfWordsPerPlayer
     }
 
-    fun setPlayerGroup(plGroup: PlayerGroup) {
-        playerGroup = plGroup
+    fun setPlayerGroup(pg: PlayerGroup) {
+        plGroup = pg
     }
 
     fun makeRandomPairs(){
-        var PGList : List<Player> = playerGroup.getPGList()
-        for(player in PGList) {
+        var players : List<Player> = plGroup.getPGList()
+        for(player in players) {
             while (!player.isPaired()) {
-                val random = (0 until PGList.size).random()
-                if (!PGList[random].isPaired()) {
-                    listOfPairs.add(Pair(player, PGList[random]))
+                val random = (0 until players.size).random()
+                if (!players[random].isPaired()) {
+                    listOfPairs.add(Pair(player, players[random]))
                     player.setPaired(true)
-                    PGList[random].setPaired(true)
+                    players[random].setPaired(true)
                 }
             }
         }
     }
 
+    fun sortByAnswers() : List<Pair<Player, Player>>{
+        val sortedPLGroup = mutableListOf<Pair<Player, Player>>()
+        for(pair in listOfPairs)
+            sortedPLGroup.add(pair)
+        return sortedPLGroup.sortedWith(answersComparator)
+    }
 
 }
 
 
-
 fun main() {
-    var g1 = Game()
-    println(g1)
+    //var g1 = Game()
+    //g1.setPlayerGroup(DatabaseServiceProvider.db.getPlayerGroup("matf"))
+    //println(g1)
 }

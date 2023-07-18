@@ -1,10 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string-array name="Groups">
-        <item>Matf</item>
-        <item>Asocijacije</item>
-        <item>3r</item>
-    </string-array>
 
     <string-array name="Numbers">
         <item>2</item>
@@ -13,6 +8,7 @@
         <item>8</item>
         <item>10</item>
     </string-array>
+
     <string-array name="NumOfWords">
         <item>1</item>
         <item>2</item>

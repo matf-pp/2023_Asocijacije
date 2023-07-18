@@ -30,25 +30,32 @@ class NewGroupActivity : AppCompatActivity() {
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
         autocompleteTV.setAdapter(arrayAdapter)
 
+        var numberOfPlayers : String = ""
+        autocompleteTV.setOnItemClickListener { parent, view, position, id ->
+            val selectedGroup = parent.getItemAtPosition(position)
+            numberOfPlayers = selectedGroup.toString()
+            //-------------------------------
+            //testiram nes:
+            //var broj = selectedGroup.toString()
+            //textViewError.text = broj
+
+            //newGroup.setPGNumOfPl(numberOfPlayers)
+        }
+
         val btnNext: Button = findViewById(R.id.btnNextNewGroup)
         btnNext.setOnClickListener(){
             if(editText.text.isEmpty()){
                 textViewError.text = "Unesite ime tima!"
             }else {
                 if (autocompleteTV.text.isEmpty()) {
-                    textViewError.text = "Unesite broj igraca!"
+                    textViewError.text = "Unesite broj igrača!"
                 }else{
                     val groupName = editText.text.toString()
-                    val newGroup = PlayerGroup(groupName)
-                    var numberOfPlayers :Int
-                    autocompleteTV.setOnItemClickListener { parent, view, position, id ->
-                        val selectedGroup = parent.getItemAtPosition(position)
-                        numberOfPlayers = selectedGroup.toString().toInt()
-                        //newGroup.setPGNumOfPl(numberOfPlayers
-                    }
 
+                    //posalje dva stringa
                     val bundle = Bundle()
                     bundle.putString("id", groupName)
+                    bundle.putString("num", numberOfPlayers)
                     val intent = Intent(this, AddPlayersActivity::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)

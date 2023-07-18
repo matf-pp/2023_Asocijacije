@@ -8,6 +8,8 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.myapplication.model.Game
+import java.io.Serializable
 
 class GroupInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +29,14 @@ class GroupInfoActivity : AppCompatActivity() {
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView3)
         autocompleteTV.setAdapter(arrayAdapter)
 
+        //preuzimanje iz proslog activity-ja:
+        //ne radi ovo :(((((
 
-
-
+        /*
+        val game = intent.getSerializableExtra("game") as Game
+        game.makeRandomPairs()
+        tVListOfPairs.text = game.listOfPairs.toString()
+        */
 
         //dugmici
         val tvError = findViewById<TextView>(R.id.numOfWordsError)
@@ -48,5 +55,7 @@ class GroupInfoActivity : AppCompatActivity() {
             val intent = Intent(this, PreviousGamesActivity::class.java)
             startActivity(intent)
         }
+
+        //treba nam i random dugme
     }
 }

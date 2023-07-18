@@ -29,8 +29,8 @@ class InMemoryDatabaseService : DatabaseService {
         println("AddPlayerGroup function: ${playerGroup.getPGName()}, ${playerGroup.getPGList()}" )
     }
 
-    override fun getPlayerGroup(name: String) {
-        TODO("Not yet implemented")
+    override fun getPlayerGroup(name: String) : PlayerGroup {
+        return this.playerGroupList.single { it.getPGName() == name }
     }
 
     override fun removePlayerGroup(playerGroup: PlayerGroup) {

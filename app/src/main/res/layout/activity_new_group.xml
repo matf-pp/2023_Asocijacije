@@ -44,7 +44,7 @@
         android:id="@+id/labelNumber"
         android:layout_width="179dp"
         android:layout_height="53dp"
-        android:text="Broj igraca: "
+        android:text="Broj igrača: "
         android:textColor="@color/buttons"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
