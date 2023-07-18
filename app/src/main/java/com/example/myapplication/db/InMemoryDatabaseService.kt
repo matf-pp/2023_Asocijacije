@@ -8,43 +8,35 @@ private var firstTimeIn: Boolean = true
 
 class InMemoryDatabaseService : DatabaseService {
 
-    var playerGroupList : MutableList<PlayerGroup> = mutableListOf()
-    var currentGame : Game = Game()
+    private var playerGroupList : MutableList<PlayerGroup> = mutableListOf()
+    private var currentGame : Game = Game()
     override fun connect(): DatabaseService {
         return this
     }
-
     override fun getPlayerGroups(): MutableList<PlayerGroup> {
         return this.playerGroupList
     }
-
     override fun getPlayerGroupNames(): MutableList<String> {
         val pom : MutableList<String> = mutableListOf()
         for (plGroup in playerGroupList)
             pom.add(plGroup.getPGName())
         return pom
     }
-
     override fun addPlayerGroup(playerGroup: PlayerGroup) {
         playerGroupList.add(playerGroup)
     }
-
     override fun getPlayerGroup(name: String) : PlayerGroup {
         return playerGroupList.single { it.getPGName() == name }
     }
-
     override fun removePlayerGroup(playerGroup: PlayerGroup) {
         TODO("Not yet implemented")
     }
-
     override fun setGame(game: Game) {
         currentGame = game
     }
-
     override fun getGame(): Game {
         return currentGame
     }
-
     override fun dataInit() {
         if(firstTimeIn) {
             val playerGroupAsocijacije = PlayerGroup("Asocijacije")

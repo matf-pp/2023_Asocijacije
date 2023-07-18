@@ -16,23 +16,18 @@ class PlayerGroup(private var name: String) {
         players.add(player)
         numOfPlayers++
     }
-    //brisanje clana iz grupe mi nema smisla posto kao jednom dodat clan ce uvek ostati u grupi
+    //opciono: brisanje clana iz grupe
 
     //geteri
     fun getPGName(): String{
         return name
     }
     fun getPlayers(): MutableList<Player>{
-        var players = mutableListOf<Player>()
-        for(player in this.players)
-            players.add(player)
         return players
     }
-
     fun getNumOfPlayers() : Int {
         return numOfPlayers
     }
-
     //seteri
     fun setPGName(pgName: String){
         name = pgName
@@ -42,20 +37,16 @@ class PlayerGroup(private var name: String) {
         for(player in pgList)
             players.add(player)
     }
-
     //fje za rad sa igracima
-
     fun makeNonRandomPairs() {
         //ako bude moglo, dodacemo (mnogo ubijam glavu sta da budu parametri i kako da ne brisem listOfPairs)
     }
     fun sortedByWins() : List<Player>{
         return players.sortedWith(winsComparator)
     }
-
     override fun toString(): String {
         return this.players.toString()
     }
-
 }
 
 //main za testiranje

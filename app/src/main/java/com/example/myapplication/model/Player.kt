@@ -17,10 +17,7 @@ class Player(private val name: String) {
     fun getNumOfCorrectAnswers(): Int{
         return numOfCorrectAnswers
     }
-
     //seteri
-
-
     fun setPaired(b: Boolean){
         paired = b
     }
@@ -37,7 +34,6 @@ class Player(private val name: String) {
     fun isPaired() : Boolean{
         return paired
     }
-
 }
 
 //main metod za testiranje fja
