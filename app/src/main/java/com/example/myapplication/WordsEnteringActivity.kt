@@ -3,6 +3,8 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -32,17 +34,60 @@ class WordsEnteringActivity : AppCompatActivity() {
         //todo napraviti geter za br igraca
         val numOfPl:Int = DatabaseServiceProvider.db.getGame().getPairs().size*2
         val numOfWordsPerPl = DatabaseServiceProvider.db.getGame().getNumOfWordsPerPlayer()
-
         var listOfPl = DatabaseServiceProvider.db.getGame().listForWordEntering()
-        //listOfPl.add("Anja")
-        //listOfPl.add("Tanja")
-        //var listOfWords = mutableListOf<String>()
         var playerCounter =0
         var wordCounter = 0
 
-
+        //naslov
         var text:String = listOfPl[playerCounter].getName().plus(" unosi reci")
         tvCurPlayerEntering.text=text
+
+        text=""
+        tvAddedWords.text = text
+        etAddWords.setText(text)
+
+        fun myEnter(){
+            etAddWords.setOnKeyListener(View.OnKeyListener{v, keyCode, event->
+                if(keyCode == KeyEvent.KEYCODE_ENTER ){
+                    val word = etAddWords.text.toString()
+                    if(wordCounter == numOfWordsPerPl){
+                        if (numOfPl - 1 == playerCounter) {
+                            val intent = Intent(this, BetweenPhasesActivity::class.java)
+                            startActivity(intent)
+                        }else{
+                            wordCounter = 0
+                            playerCounter += 1
+                            tvError.text = ""
+                            tvAddedWords.text = ""
+                            text = listOfPl[playerCounter].getName().plus(" unosi reci")
+                            tvCurPlayerEntering.text = text
+                        }
+                    }else{
+                        if(word.isNotBlank()){
+                            //todo Tanja je napravila fju zameni time
+                            if(DatabaseServiceProvider.db.getGame().getWords().contains(word)){
+                                etAddWords.setHint("Odaberite drugu rec!")
+                                etAddWords.setText("")
+                            }else {
+                                DatabaseServiceProvider.db.getGame().addWord(word)
+                                text = "${tvAddedWords.text} \n $word"
+                                tvAddedWords.text = text
+                                wordCounter += 1
+                                etAddWords.setText("")
+                                etAddWords.setHint("Unesite rec")
+                            }
+                        }
+                    }
+                    return@OnKeyListener true
+                } else{
+                    return@OnKeyListener false
+                }
+            })
+        }
+
+        etAddWords.setOnClickListener{myEnter()}
+
+        //Ok dugme
         btnOK.setOnClickListener(){
             val word = etAddWords.text.toString()
             if(wordCounter == numOfWordsPerPl) {
@@ -50,10 +95,16 @@ class WordsEnteringActivity : AppCompatActivity() {
                 tvError.text = "Vec je uneto dovoljno reci"
             }else{
                 if(word.isNotBlank()){
-                    DatabaseServiceProvider.db.getGame().addWord(word)
-                    tvAddedWords.text = "${tvAddedWords.text} \n $word"
-                    wordCounter+=1
-                    etAddWords.setText("")
+                    if(DatabaseServiceProvider.db.getGame().getWords().contains(word)) {
+                        etAddWords.setHint("Odaberite drugu rec!")
+                        etAddWords.setText("")
+                    }else {
+                        DatabaseServiceProvider.db.getGame().addWord(word)
+                        tvAddedWords.text = "${tvAddedWords.text} \n $word"
+                        wordCounter += 1
+                        etAddWords.setText("")
+                        etAddWords.setHint("Unesite rec")
+                    }
                 }
             }
         }

@@ -32,9 +32,15 @@ class GroupInfoActivity : AppCompatActivity() {
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView3)
         autocompleteTV.setAdapter(arrayAdapter)
 
+        //pravljenje i ispis parova
         var game:Game = DatabaseServiceProvider.db.getGame()
         game.makeRandomPairs()
-        tVListOfPairs.text = game.getPairs().toString()
+        var text =""
+
+        for (p in game.getPairs()){
+            text = "${text} \n ${p.first} & ${p.second}"
+        }
+        tVListOfPairs.text = text
 
         //podesavanje broja reci po igracu
 
@@ -66,7 +72,11 @@ class GroupInfoActivity : AppCompatActivity() {
         val btnChangePairs: Button = findViewById(R.id.btnChangePairs)
         btnChangePairs.setOnClickListener{
             game.makeRandomPairs()
-            tVListOfPairs.text = game.getPairs().toString()
+            text=""
+            for (p in game.getPairs()){
+                text = "${text} \n ${p.first} & ${p.second}"
+            }
+            tVListOfPairs.text = text
         }
     }
 }
