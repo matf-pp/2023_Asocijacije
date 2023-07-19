@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -34,8 +35,15 @@ class ChooseGroupActivity : AppCompatActivity() {
 
             //clanovi tima, samo sredi kako ce ih ispisati
             val textView = findViewById<TextView>(R.id.teamMembers)
+            textView.movementMethod = ScrollingMovementMethod()
+
             currentPGroup = DatabaseServiceProvider.db.getPlayerGroup(tekst)
-            textView.text = currentPGroup.getPlayers().toString()
+            var text :String = ""
+            for (player in currentPGroup.getPlayers()){
+                text = "$text \n ${player.getName()}"
+            }
+
+            textView.text = text
         }
 
         val tVerror = findViewById<TextView>(R.id.chooseGroupError)

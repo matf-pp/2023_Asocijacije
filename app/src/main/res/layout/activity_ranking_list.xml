@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.072" />
 
     <TextView
-        android:id="@+id/tvRangListPhase"
+        android:id="@+id/tvRangList"
         android:layout_width="220dp"
         android:layout_height="302dp"
         android:textAlignment="textStart"
@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.391" />
 
     <TextView
-        android:id="@+id/tvFirstPlayer"
+        android:id="@+id/tvListOfPoints"
         android:layout_width="100dp"
         android:layout_height="302dp"
         android:textAlignment="textEnd"
