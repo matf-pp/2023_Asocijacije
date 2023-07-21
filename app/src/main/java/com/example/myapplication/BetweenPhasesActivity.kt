@@ -14,8 +14,6 @@ class BetweenPhasesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_between_phases)
 
 
-
-
         //deklaracija objekata
         val tvEndOfPhase = findViewById<TextView>(R.id.tvEndOfPhase)
         val tvRangListPhase = findViewById<TextView>(R.id.tvRangListPhase)
@@ -25,17 +23,17 @@ class BetweenPhasesActivity : AppCompatActivity() {
 
 
         //postavljanje naslova
-        var numberOfPhase:Int = DatabaseServiceProvider.db.getGame().getCurrentGamePhase()
+        val numberOfPhase:Int = DatabaseServiceProvider.db.getGame().getCurrentGamePhase()
         var text:String
-        if(numberOfPhase==1){
-            text = "Pripremite se za igru"
+        text = if(numberOfPhase==1){
+            "Pripremite se za igru"
         }else{
-            text = "Kraj faze ${numberOfPhase-1}"
+            "Kraj faze ${numberOfPhase-1}"
         }
         tvEndOfPhase.text = text
 
         //postavljanje narednog igraca
-        var currentPlayer:Player
+        val currentPlayer:Player
         if(numberOfPhase == 1){
             currentPlayer = DatabaseServiceProvider.db.getGame().listForWordEntering().first()
             DatabaseServiceProvider.db.getGame().setCurrentPlayer(currentPlayer)
@@ -49,7 +47,7 @@ class BetweenPhasesActivity : AppCompatActivity() {
         //postavljanje redosleda
         text=""
         if(numberOfPhase!=1){
-            var listOfPairs = DatabaseServiceProvider.db.getGame().sortedByAnswers()
+            val listOfPairs = DatabaseServiceProvider.db.getGame().sortedByAnswers()
             for(pair in listOfPairs){
                 text = "$text \n ${pair.first} & ${pair.second}"
             }
@@ -65,7 +63,7 @@ class BetweenPhasesActivity : AppCompatActivity() {
 
 
         //dugme
-        btnBegin.setOnClickListener(){
+        btnBegin.setOnClickListener {
             DatabaseServiceProvider.db.getGame().shuffleWords()
             val firstWord = DatabaseServiceProvider.db.getGame().getWords().first()
             DatabaseServiceProvider.db.getGame().setCurrentWord(firstWord)

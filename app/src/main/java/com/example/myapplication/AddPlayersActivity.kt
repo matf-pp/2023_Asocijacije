@@ -22,7 +22,7 @@ class AddPlayersActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_players)
 
         val btnBack: Button = findViewById(R.id.btnBackAddPlayers)
-        btnBack.setOnClickListener(){
+        btnBack.setOnClickListener {
             val intent = Intent(this, NewGroupActivity::class.java)
             startActivity(intent)
         }
@@ -55,7 +55,7 @@ class AddPlayersActivity : AppCompatActivity() {
         val numOfPl = groupNum
 
         val btnOK: Button = findViewById(R.id.btnOK)
-        btnOK.setOnClickListener(){
+        btnOK.setOnClickListener {
             val name = editText.text.toString()
             if(clickCount == numOfPl) {
                 textViewError.text = "Vec je uneto dovoljno igraca"
@@ -71,16 +71,15 @@ class AddPlayersActivity : AppCompatActivity() {
         }
 
         val btnNext: Button = findViewById(R.id.btnNextAddPlayers)
-        btnNext.setOnClickListener(){
+        btnNext.setOnClickListener {
             if(clickCount!=numOfPl) {
                 textViewError.text = "Nema dovoljno igraca!"
             }else{
                 val intent = Intent(this, ChooseGroupActivity::class.java)
                 startActivity(intent)
                 //dodamo currentGroup u bazu:
-                //todo ovu prvu fju ne bi trebalo da pozivam, vec da javim da se apdejtovala baza, pa da mi fja iz main-a prikaze listu
                 DatabaseServiceProvider.db.addPlayerGroup(currentGroup)
-                mPlayerGroupViewModel = ViewModelProvider(this).get(PlayerGroupViewModel::class.java)
+                mPlayerGroupViewModel = ViewModelProvider(this)[PlayerGroupViewModel::class.java]
                 insertDataToDatabase(currentGroup)
             }
         }

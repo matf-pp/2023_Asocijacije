@@ -11,20 +11,15 @@ import com.example.myapplication.model.PlayerGroup
 //data access object
 @Dao
 interface PlayerGroupDao {
-
     //suspend - kljucna rijec za koriscenje korutina
     @Insert
     suspend fun addPlayerGroup(pg : PlayerGroup)
-
     @Update
     suspend fun updatePlayerGroup(pg : PlayerGroup)
-
     @Delete
     suspend fun deletePlayerGroup(pg : PlayerGroup)
-
     @Query("DELETE FROM playergroups")
     suspend fun deleteAllPlayerGroups()
-
     @Query("SELECT * FROM playergroups")
     fun readAllData() : LiveData<List<PlayerGroup>>
 }

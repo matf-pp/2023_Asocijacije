@@ -24,10 +24,6 @@ class ChooseGroupActivity : AppCompatActivity() {
         }
 
         //vadicemo iz baze listu grupa
-
-        //nece odmah da mi prikaze listu iz lokalne baze, ne razumijem zasto??
-        //observe bi trebao da vrati vec postojece podatke, ali iz nekog razloga to radi tek kad se predje u novi prozor
-        //zato ovo pozivam odmah u main activity-u, a ne ovdje
         var currentPGroup = PlayerGroup("")
 //        mPlayerGroupViewModel = ViewModelProvider(this)[PlayerGroupViewModel::class.java]
 //        mPlayerGroupViewModel.readAllData.observe(this) { playergroups ->
@@ -39,7 +35,7 @@ class ChooseGroupActivity : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, existingGroups)
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView)
         autocompleteTV.setAdapter(arrayAdapter)
-        autocompleteTV.setOnItemClickListener { parent, view, position, id ->
+        autocompleteTV.setOnItemClickListener { parent, _ , position, _ ->
             val selectedGroup = parent.getItemAtPosition(position)
             val tekst = selectedGroup.toString()
 

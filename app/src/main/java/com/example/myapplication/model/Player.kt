@@ -36,8 +36,8 @@ data class Player(
     fun correctAnswersIncrease() {
         numOfCorrectAnswers++
     }
-    override fun toString(): String {
-        return this.getName().plus(" ").plus(numOfWins)
+    override fun toString() : String {
+        return this.getName()
     }
 }
 

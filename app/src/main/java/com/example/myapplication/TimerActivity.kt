@@ -22,15 +22,15 @@ class TimerActivity : AppCompatActivity() {
 
         //naslov
         var numOfPhase = DatabaseServiceProvider.db.getGame().getCurrentGamePhase()
-        var text = "FAZA ${numOfPhase.toString()}"
+        var text = "FAZA $numOfPhase"
         tvNumberOfPhase.text = text
-        if(numOfPhase == 1){
-            text = "verbalno objasnjavanje"
+        text = if(numOfPhase == 1){
+            "verbalno objasnjavanje"
         }else{
             if(numOfPhase == 2){
-                text = "pantomima"
+                "pantomima"
             }else{
-                text ="crtanje"
+                "crtanje"
             }
         }
         tvNameOfPhase.text = text
@@ -40,7 +40,7 @@ class TimerActivity : AppCompatActivity() {
         object : CountDownTimer(5000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
-                tvTimer.setText("" + millisUntilFinished / 1000)
+                tvTimer.text = "" + millisUntilFinished / 1000
                 tvWord.text = word
 
                 btnCorrectAnswer.setOnClickListener {

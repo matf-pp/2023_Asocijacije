@@ -17,13 +17,13 @@ class RankingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ranking)
 
         val btnMainMenu: Button = findViewById(R.id.btnMenu)
-        btnMainMenu.setOnClickListener(){
+        btnMainMenu.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
         val btnNewGame :Button = findViewById(R.id.btnNewGame)
-        btnNewGame.setOnClickListener(){
+        btnNewGame.setOnClickListener {
             val intent = Intent(this, GroupInfoActivity::class.java)
             startActivity(intent)
         }

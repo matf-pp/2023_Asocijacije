@@ -21,7 +21,7 @@ class BetweenPlayersActivity : AppCompatActivity() {
         //par koji je zavrsio
         var currentPlayer = DatabaseServiceProvider.db.getGame().getCurrentPlayer()
         var text:String = DatabaseServiceProvider.db.getGame().pairedWith(currentPlayer).getName()
-        text = "${text} & ${currentPlayer.getName()} su osvojili: "
+        text = "$text & ${currentPlayer.getName()} su osvojili: "
         tvPairNames.text = text
 
         //broj poena
@@ -33,10 +33,10 @@ class BetweenPlayersActivity : AppCompatActivity() {
         DatabaseServiceProvider.db.getGame().nextPlayer()
         currentPlayer = DatabaseServiceProvider.db.getGame().getCurrentPlayer()
         text = currentPlayer.getName()
-        tvNextPlayer.text="Naredni igrac je ${text}"
+        tvNextPlayer.text="Naredni igrac je $text"
 
         //dugme
-        btnBegin.setOnClickListener(){
+        btnBegin.setOnClickListener {
             val intent = Intent(this, TimerActivity::class.java)
             startActivity(intent)
         }

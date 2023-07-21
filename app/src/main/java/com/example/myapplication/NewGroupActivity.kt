@@ -16,7 +16,7 @@ class NewGroupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_group)
 
         val btnBack: Button = findViewById(R.id.btnBackNewGroup)
-        btnBack.setOnClickListener(){
+        btnBack.setOnClickListener {
             val intent = Intent(this, ChooseGroupActivity::class.java)
             startActivity(intent)
         }
@@ -29,8 +29,8 @@ class NewGroupActivity : AppCompatActivity() {
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView2)
         autocompleteTV.setAdapter(arrayAdapter)
 
-        var numberOfPlayers : String = ""
-        autocompleteTV.setOnItemClickListener { parent, view, position, id ->
+        var numberOfPlayers = ""
+        autocompleteTV.setOnItemClickListener { parent, _, position, _ ->
             val selectedGroup = parent.getItemAtPosition(position)
             numberOfPlayers = selectedGroup.toString()
             //-------------------------------
@@ -42,7 +42,7 @@ class NewGroupActivity : AppCompatActivity() {
         }
 
         val btnNext: Button = findViewById(R.id.btnNextNewGroup)
-        btnNext.setOnClickListener(){
+        btnNext.setOnClickListener {
             if(editText.text.isEmpty()){
                 textViewError.text = "Unesite ime tima!"
             }else {

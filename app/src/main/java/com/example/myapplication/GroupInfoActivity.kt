@@ -29,18 +29,18 @@ class GroupInfoActivity : AppCompatActivity() {
         autocompleteTV.setAdapter(arrayAdapter)
 
         //pravljenje i ispis parova
-        var game:Game = DatabaseServiceProvider.db.getGame()
+        val game:Game = DatabaseServiceProvider.db.getGame()
         game.makeRandomPairs()
         var text =""
 
         for (p in game.getPairs()){
-            text = "${text} \n ${p.first} & ${p.second}"
+            text = "$text \n ${p.first} & ${p.second}"
         }
         tVListOfPairs.text = text
 
         //podesavanje broja reci po igracu
 
-        autocompleteTV.setOnItemClickListener { parent, view, position, id ->
+        autocompleteTV.setOnItemClickListener { parent, _, position, _ ->
             val selectedNumOfWords = parent.getItemAtPosition(position)
             val numOfWords = selectedNumOfWords.toString().toInt()
             game.setNumOfWordsPerPlayer(numOfWords)
@@ -70,7 +70,7 @@ class GroupInfoActivity : AppCompatActivity() {
             game.makeRandomPairs()
             text=""
             for (p in game.getPairs()){
-                text = "${text} \n ${p.first} & ${p.second}"
+                text = "$text \n ${p.first} & ${p.second}"
             }
             tVListOfPairs.text = text
         }

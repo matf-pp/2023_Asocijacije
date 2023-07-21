@@ -135,6 +135,11 @@ class Game : Serializable {
     fun sortedByWins() : List<Player> {
         return plGroup.sortedByWins()
     }
+    fun reset() {
+        plGroup.resetAnswers()
+        //todo kad budemo na kraju incijalizovali timer na neki veci broj moramo i ovdje promijeniti!
+        setTimer(5)
+    }
     override fun toString(): String {
         return this.plGroup.toString()
     }

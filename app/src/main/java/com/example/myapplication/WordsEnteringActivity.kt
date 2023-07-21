@@ -15,7 +15,7 @@ class WordsEnteringActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_words_entering)
         val btnBack: Button = findViewById(R.id.btnBackWordEntering)
-        btnBack.setOnClickListener(){
+        btnBack.setOnClickListener {
             val intent = Intent(this, ChooseGroupActivity::class.java)
             startActivity(intent)
         }
@@ -30,7 +30,7 @@ class WordsEnteringActivity : AppCompatActivity() {
 
         val numOfPl:Int = DatabaseServiceProvider.db.getGame().getPlayerGroup().getNumOfPlayers()
         val numOfWordsPerPl = DatabaseServiceProvider.db.getGame().getNumOfWordsPerPlayer()
-        var listOfPl = DatabaseServiceProvider.db.getGame().listForWordEntering()
+        val listOfPl = DatabaseServiceProvider.db.getGame().listForWordEntering()
         var playerCounter =0
         var wordCounter = 0
 
@@ -43,7 +43,7 @@ class WordsEnteringActivity : AppCompatActivity() {
         etAddWords.setText(text)
 
         fun myEnter(){
-            etAddWords.setOnKeyListener(View.OnKeyListener{v, keyCode, event->
+            etAddWords.setOnKeyListener(View.OnKeyListener{ _, keyCode, _ ->
                 if(keyCode == KeyEvent.KEYCODE_ENTER ){
                     val word = etAddWords.text.toString()
                     if(wordCounter == numOfWordsPerPl){
@@ -61,7 +61,7 @@ class WordsEnteringActivity : AppCompatActivity() {
                     }else{
                         if(word.isNotBlank()){
                             if(DatabaseServiceProvider.db.getGame().isAlreadyEntered(word)){
-                                etAddWords.setHint("Odaberite drugu rec!")
+                                etAddWords.hint = "Odaberite drugu rec!"
                                 etAddWords.setText("")
                             }else {
                                 DatabaseServiceProvider.db.getGame().addWord(word)
@@ -69,7 +69,7 @@ class WordsEnteringActivity : AppCompatActivity() {
                                 tvAddedWords.text = text
                                 wordCounter += 1
                                 etAddWords.setText("")
-                                etAddWords.setHint("Unesite rec")
+                                etAddWords.hint = "Unesite rec"
                             }
                         }
                     }
@@ -83,7 +83,7 @@ class WordsEnteringActivity : AppCompatActivity() {
         etAddWords.setOnClickListener{myEnter()}
 
         //Ok dugme
-        btnOK.setOnClickListener(){
+        btnOK.setOnClickListener {
             val word = etAddWords.text.toString()
             if(wordCounter == numOfWordsPerPl) {
                 etAddWords.setText("")
@@ -91,14 +91,14 @@ class WordsEnteringActivity : AppCompatActivity() {
             }else{
                 if(word.isNotBlank()){
                     if(DatabaseServiceProvider.db.getGame().getWords().contains(word)) {
-                        etAddWords.setHint("Odaberite drugu rec!")
+                        etAddWords.hint = "Odaberite drugu rec!"
                         etAddWords.setText("")
                     }else {
                         DatabaseServiceProvider.db.getGame().addWord(word)
                         tvAddedWords.text = "${tvAddedWords.text} \n $word"
                         wordCounter += 1
                         etAddWords.setText("")
-                        etAddWords.setHint("Unesite rec")
+                        etAddWords.hint = "Unesite rec"
                     }
                 }
             }

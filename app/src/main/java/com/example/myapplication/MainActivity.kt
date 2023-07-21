@@ -20,12 +20,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnPlay: Button = findViewById(R.id.btnPlay)
-        btnPlay.setOnClickListener(){
+        btnPlay.setOnClickListener {
             val intent = Intent(this, ChooseGroupActivity::class.java)
             startActivity(intent)
         }
         val btnInstruction: Button = findViewById(R.id.btnInstructions)
-        btnInstruction.setOnClickListener(){
+        btnInstruction.setOnClickListener {
             val intent = Intent(this, InstructionsActivity::class.java)
             startActivity(intent)
         }
