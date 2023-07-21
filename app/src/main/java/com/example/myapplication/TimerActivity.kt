@@ -7,7 +7,6 @@ import android.os.CountDownTimer
 import android.widget.Button
 import android.widget.TextView
 import com.example.myapplication.db.DatabaseServiceProvider
-import kotlin.concurrent.timer
 
 class TimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +49,7 @@ class TimerActivity : AppCompatActivity() {
                     if(temp.isNullOrEmpty()){
                         if(numOfPhase==3){
                             this.cancel()
-                            val intent = Intent(this@TimerActivity,RankingListActivity::class.java)
+                            val intent = Intent(this@TimerActivity,RankingActivity::class.java)
                             startActivity(intent)
                         }else{
                             this.cancel()

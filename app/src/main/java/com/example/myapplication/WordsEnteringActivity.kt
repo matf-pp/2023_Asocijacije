@@ -9,9 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.myapplication.db.DatabaseServiceProvider
-import org.w3c.dom.Text
-import com.example.myapplication.model.Game
-import com.example.myapplication.model.Player
 
 class WordsEnteringActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +28,7 @@ class WordsEnteringActivity : AppCompatActivity() {
         val tvError = findViewById<TextView>(R.id.numberOfEnteredWordsError)
         val btnNextPlayer:Button = findViewById(R.id.btnNextPlayer)
 
-        //todo napraviti geter za br igraca
-        val numOfPl:Int = DatabaseServiceProvider.db.getGame().getPairs().size*2
+        val numOfPl:Int = DatabaseServiceProvider.db.getGame().getPlayerGroup().getNumOfPlayers()
         val numOfWordsPerPl = DatabaseServiceProvider.db.getGame().getNumOfWordsPerPlayer()
         var listOfPl = DatabaseServiceProvider.db.getGame().listForWordEntering()
         var playerCounter =0
@@ -64,8 +60,7 @@ class WordsEnteringActivity : AppCompatActivity() {
                         }
                     }else{
                         if(word.isNotBlank()){
-                            //todo Tanja je napravila fju zameni time
-                            if(DatabaseServiceProvider.db.getGame().getWords().contains(word)){
+                            if(DatabaseServiceProvider.db.getGame().isAlreadyEntered(word)){
                                 etAddWords.setHint("Odaberite drugu rec!")
                                 etAddWords.setText("")
                             }else {

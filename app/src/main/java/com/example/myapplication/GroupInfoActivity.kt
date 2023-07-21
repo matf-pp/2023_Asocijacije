@@ -1,18 +1,14 @@
 package com.example.myapplication
 
-import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import com.example.myapplication.db.DatabaseServiceProvider
 import com.example.myapplication.model.Game
-import java.io.Serializable
 
 class GroupInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

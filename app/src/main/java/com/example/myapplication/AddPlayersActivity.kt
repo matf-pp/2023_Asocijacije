@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.db.DatabaseServiceProvider
 import com.example.myapplication.model.PlayerGroup
 import com.example.myapplication.model.Player
-import com.example.myapplication.NewGroupActivity
-import com.example.myapplication.db.DatabaseServiceProvider
+import com.example.myapplication.db.PlayerGroupViewModel
 
 class AddPlayersActivity : AppCompatActivity() {
+    private lateinit var mPlayerGroupViewModel : PlayerGroupViewModel
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +46,13 @@ class AddPlayersActivity : AppCompatActivity() {
         //testiram da li se ispravno preuzelo:
         //textView.text="$groupName \n $groupNum"
 
-        var currentGroup : PlayerGroup = PlayerGroup(groupName)
+        val currentGroup = PlayerGroup(groupName)
 
         //petlja sa brojacem groupNum
         //dodamo igrace u currentGroup
 
-        var clickCount : Int = 0
-        var numOfPl = groupNum
+        var clickCount = 0
+        val numOfPl = groupNum
 
         val btnOK: Button = findViewById(R.id.btnOK)
         btnOK.setOnClickListener(){
@@ -67,7 +70,6 @@ class AddPlayersActivity : AppCompatActivity() {
             }
         }
 
-
         val btnNext: Button = findViewById(R.id.btnNextAddPlayers)
         btnNext.setOnClickListener(){
             if(clickCount!=numOfPl) {
@@ -76,8 +78,14 @@ class AddPlayersActivity : AppCompatActivity() {
                 val intent = Intent(this, ChooseGroupActivity::class.java)
                 startActivity(intent)
                 //dodamo currentGroup u bazu:
+                //todo ovu prvu fju ne bi trebalo da pozivam, vec da javim da se apdejtovala baza, pa da mi fja iz main-a prikaze listu
                 DatabaseServiceProvider.db.addPlayerGroup(currentGroup)
+                mPlayerGroupViewModel = ViewModelProvider(this).get(PlayerGroupViewModel::class.java)
+                insertDataToDatabase(currentGroup)
             }
         }
+    }
+    private fun insertDataToDatabase(pg : PlayerGroup) {
+        mPlayerGroupViewModel.addPlayerGroup(pg)
     }
 }

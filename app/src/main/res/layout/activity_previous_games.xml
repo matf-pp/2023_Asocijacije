@@ -24,15 +24,51 @@
         app:layout_constraintVertical_bias="0.024" />
 
     <TextView
-        android:id="@+id/previosGamesList"
+        android:id="@+id/previousGamesList"
+        android:layout_width="220dp"
+        android:layout_height="302dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/buttons"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.391" />
 
-        android:layout_width="328dp"
-        android:layout_height="404dp"
-        android:textSize="20sp"
+
+    <TextView
+        android:id="@+id/labelPreviousGames"
+        android:layout_width="353dp"
+        android:layout_height="105dp"
+        android:textAlignment="center"
+        android:textColor="@color/buttons"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:text="Prethodne partije"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
+        app:layout_constraintVertical_bias="0.072" />
+
+    <TextView
+        android:id="@+id/tvListOfWins"
+        android:layout_width="100dp"
+        android:layout_height="302dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/buttons"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.906"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.391" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

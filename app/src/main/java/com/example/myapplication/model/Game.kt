@@ -6,20 +6,24 @@ class Game : Serializable {
     //ne moze da se zove playerGroup zbog JVM, ima isti naziv za neki modul
     private var plGroup : PlayerGroup = PlayerGroup("")
     private var numOfWordsPerPlayer : Int = 0
-    private var wordBank = mutableListOf<String>()
     private var currentPlayer : Player = Player("")
-    private var currentWord : String = ""
-    private var currentGamePhase : Int = 1
     private var listOfPairs = mutableListOf<Pair<Player, Player>>()
+    private var currentGamePhase : Int = 1
+    private var wordBank = mutableListOf<String>()
+    private var currentWord : String = ""
+    private var timer : Int = 5
 
+    fun getPlayerGroup() : PlayerGroup {
+        return plGroup
+    }
     fun getNumOfWordsPerPlayer() : Int {
         return numOfWordsPerPlayer
     }
-    fun getPairs() : MutableList<Pair<Player, Player>> {
-        return listOfPairs
-    }
     fun getWords() : MutableList<String> {
         return wordBank
+    }
+    fun getPairs() : MutableList<Pair<Player, Player>> {
+        return listOfPairs
     }
     fun getCurrentPlayer() : Player {
         return currentPlayer
@@ -41,6 +45,9 @@ class Game : Serializable {
             wordBank[i + 1]
         }
     }
+    fun getTimer() : Int {
+        return timer
+    }
     //mijenja trenutnog igraca, a kad stignemo na kraj liste krecemo ispcetka
     fun nextPlayer() {
         val i = listForWordEntering().indexOf(currentPlayer)
@@ -55,9 +62,6 @@ class Game : Serializable {
     fun setNumOfWordsPerPlayer(n : Int) {
         numOfWordsPerPlayer = n
     }
-    fun setListOfPairs(list : MutableList<Pair<Player, Player>> ) {
-        listOfPairs = list
-    }
     fun setCurrentGamePhase(n: Int) {
         currentGamePhase = n
     }
@@ -66,6 +70,9 @@ class Game : Serializable {
     }
     fun setCurrentPlayer(player: Player) {
         currentPlayer=player
+    }
+    fun setTimer(n : Int) {
+        timer = n
     }
     fun makeRandomPairs(){
         val list = mutableListOf<Pair<Player, Player>>()
@@ -102,6 +109,9 @@ class Game : Serializable {
     fun shuffleWords() {
         wordBank.shuffle()
     }
+    fun isAlreadyEntered(word: String) : Boolean {
+        return wordBank.contains(word)
+    }
 //ove 2 fje mogu posluziti u BetweenPlayersActivity
     fun pairedWith (player: Player) : Player {
         val theirPair: Player
@@ -121,54 +131,59 @@ class Game : Serializable {
     fun pointsOfAPair(pair: Pair<Player, Player>) : Int {
         return pair.first.getNumOfCorrectAnswers() + pair.second.getNumOfCorrectAnswers()
     }
+
+    fun sortedByWins() : List<Player> {
+        return plGroup.sortedByWins()
+    }
     override fun toString(): String {
         return this.plGroup.toString()
     }
-}
-
-
-fun main() {
-    val g1 = Game()
-    val pg = PlayerGroup("test")
-    val pl1 = Player("tanja")
-    val pl2 = Player("anja")
-    val pl3 = Player("vaske")
-    val pl4 = Player("zile")
-    val pl5 = Player("sanja")
-    val pl6 = Player("dragana")
-    pg.add(pl1)
-    pg.add(pl2)
-    pg.add(pl3)
-    pg.add(pl4)
-    pg.add(pl5)
-    pg.add(pl6)
-    g1.setPlayerGroup(pg)
-
-
-    g1.makeRandomPairs()
-//    println("random")
-    println(g1.getPairs())
-//    print("lista za unos rijeci: ")
-    println(g1.listForWordEntering())
-
-    /*
-    val rijec1="prva"
-    val rijec2="druga"
-    g1.addWord(rijec1)
-    g1.addWord(rijec2)
-//    println(g1.getWords())
-
-    g1.setCurrentWord(rijec1)
-//    println(g1.getCurrentWord())
-//    println(g1.getNextWord(rijec1))
-//    println(g1.getNextWord(g1.getCurrentWord()))
-*/
-
-    g1.setCurrentPlayer(pl3)
-    println(g1.getCurrentPlayer())
-    g1.nextPlayer()
-    println(g1.getCurrentPlayer())
-    g1.nextPlayer()
-    println(g1.getCurrentPlayer())
 
 }
+
+//testiranje
+//fun main() {
+//    val g1 = Game()
+//    val pg = PlayerGroup("test")
+//    val pl1 = Player("tanja")
+//    val pl2 = Player("anja")
+//    val pl3 = Player("vaske")
+//    val pl4 = Player("zile")
+//    val pl5 = Player("sanja")
+//    val pl6 = Player("dragana")
+//    pg.add(pl1)
+//    pg.add(pl2)
+//    pg.add(pl3)
+//    pg.add(pl4)
+//    pg.add(pl5)
+//    pg.add(pl6)
+//    g1.setPlayerGroup(pg)
+//
+//
+//    g1.makeRandomPairs()
+////    println("random")
+//    println(g1.getPairs())
+////    print("lista za unos rijeci: ")
+//    println(g1.listForWordEntering())
+//
+//    /*
+//    val rijec1="prva"
+//    val rijec2="druga"
+//    g1.addWord(rijec1)
+//    g1.addWord(rijec2)
+////    println(g1.getWords())
+//
+//    g1.setCurrentWord(rijec1)
+////    println(g1.getCurrentWord())
+////    println(g1.getNextWord(rijec1))
+////    println(g1.getNextWord(g1.getCurrentWord()))
+//*/
+//
+//    g1.setCurrentPlayer(pl3)
+//    println(g1.getCurrentPlayer())
+//    g1.nextPlayer()
+//    println(g1.getCurrentPlayer())
+//    g1.nextPlayer()
+//    println(g1.getCurrentPlayer())
+//
+//}

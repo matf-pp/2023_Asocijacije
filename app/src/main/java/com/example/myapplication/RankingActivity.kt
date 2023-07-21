@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.db.DatabaseServiceProvider
-import com.example.myapplication.model.Game
+import com.example.myapplication.db.PlayerGroupViewModel
+import com.example.myapplication.model.Player
 
-class RankingListActivity : AppCompatActivity() {
+private lateinit var mPlayerGroupViewModel: PlayerGroupViewModel
+class RankingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ranking_list)
+        setContentView(R.layout.activity_ranking)
 
         val btnMainMenu: Button = findViewById(R.id.btnMenu)
         btnMainMenu.setOnClickListener(){
@@ -25,11 +28,11 @@ class RankingListActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val tvRangList = findViewById<TextView>(R.id.tvRangList)
+        val tvRangList = findViewById<TextView>(R.id.tvRanking)
         val tvListOfPoints = findViewById<TextView>(R.id.tvListOfPoints)
-        var text:String =""
-        var num :Int
-        var listOfPairs = DatabaseServiceProvider.db.getGame().sortedByAnswers()
+        var text = ""
+        var num : Int
+        val listOfPairs = DatabaseServiceProvider.db.getGame().sortedByAnswers()
         for(pair in listOfPairs){
             text = "$text \n ${pair.first} & ${pair.second}"
         }
@@ -41,6 +44,22 @@ class RankingListActivity : AppCompatActivity() {
             text = "$text \n $num"
         }
         tvListOfPoints.text = text
+        //reset broja tacnih odgovora
+        DatabaseServiceProvider.db.getGame().getPlayerGroup().resetAnswers()
+        //povecavanje broja pobjeda i mijenjanje baze
+        winsIncrease(listOfPairs.first())
+        //mijenjanje baze
+        mPlayerGroupViewModel = ViewModelProvider(this)[PlayerGroupViewModel::class.java]
+        updatePlayGroup()
 
+    }
+
+    private fun winsIncrease(pair: Pair<Player, Player>) {
+        pair.first.winsIncrease()
+        pair.second.winsIncrease()
+    }
+    private fun updatePlayGroup() {
+        val updatedPlayerGroup = DatabaseServiceProvider.db.getGame().getPlayerGroup()
+        mPlayerGroupViewModel.updatePlayerGroup(updatedPlayerGroup)
     }
 }
