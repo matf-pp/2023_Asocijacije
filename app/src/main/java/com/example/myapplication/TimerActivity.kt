@@ -37,7 +37,8 @@ class TimerActivity : AppCompatActivity() {
 
         var word = DatabaseServiceProvider.db.getGame().getCurrentWord()
         val currentPlayer = DatabaseServiceProvider.db.getGame().getCurrentPlayer()
-        object : CountDownTimer(5000, 1000) {
+        val seconds:Long = DatabaseServiceProvider.db.getGame().getTimer().toLong()
+        object : CountDownTimer(seconds * 1000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
                 tvTimer.text = "" + millisUntilFinished / 1000

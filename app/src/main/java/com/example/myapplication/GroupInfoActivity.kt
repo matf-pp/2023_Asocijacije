@@ -27,6 +27,12 @@ class GroupInfoActivity : AppCompatActivity() {
         val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, numbers)
         val autocompleteTV = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView3)
         autocompleteTV.setAdapter(arrayAdapter)
+        //-----------------------------------------------------------
+        val seconds = resources.getStringArray(R.array.Seconds)
+        val arrayAdapter2 = ArrayAdapter(this, R.layout.dropdown_item, seconds)
+        val autocompleteTV2 = findViewById<AutoCompleteTextView>(R.id.autoCompleteTextView4)
+        autocompleteTV2.setAdapter(arrayAdapter2)
+
 
         //pravljenje i ispis parova
         val game:Game = DatabaseServiceProvider.db.getGame()
@@ -46,10 +52,23 @@ class GroupInfoActivity : AppCompatActivity() {
             game.setNumOfWordsPerPlayer(numOfWords)
         }
 
+        //podesavanje timer-a
+
+        autocompleteTV2.setOnItemClickListener { parent, _, position, _ ->
+            val selectedSeconds = parent.getItemAtPosition(position)
+            val seconds = selectedSeconds.toString().toInt()
+            game.setTimer(seconds)
+            DatabaseServiceProvider.db.getGame().setTimer(seconds)
+        }
+
         //dugmici
         val tvError = findViewById<TextView>(R.id.numOfWordsError)
         val btnStart: Button = findViewById(R.id.btnStart)
         btnStart.setOnClickListener{
+            if(autocompleteTV2.text.toString().isEmpty()){
+                val defaultSeconds = resources.getInteger(R.integer.DefaultSeconds)
+                DatabaseServiceProvider.db.getGame().setTimer(defaultSeconds)
+            }
             if(autocompleteTV.text.toString().isEmpty()){
                 tvError.text = "Izaberite broj reci!"
             }else{

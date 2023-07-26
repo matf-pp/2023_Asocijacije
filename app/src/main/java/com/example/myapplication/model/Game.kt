@@ -1,5 +1,7 @@
 package com.example.myapplication.model
 
+import android.content.res.Resources
+import com.example.myapplication.R
 import java.io.Serializable
 
 class Game : Serializable {
@@ -11,7 +13,7 @@ class Game : Serializable {
     private var currentGamePhase : Int = 1
     private var wordBank = mutableListOf<String>()
     private var currentWord : String = ""
-    private var timer : Int = 5
+    private var timer : Int = 5//Resources.getSystem().getInteger(R.integer.DefaultSeconds).toInt()
 
     fun getPlayerGroup() : PlayerGroup {
         return plGroup
@@ -137,8 +139,7 @@ class Game : Serializable {
     }
     fun reset() {
         plGroup.resetAnswers()
-        //todo kad budemo na kraju incijalizovali timer na neki veci broj moramo i ovdje promijeniti!
-        setTimer(5)
+        setTimer(Resources.getSystem().getInteger(R.integer.DefaultSeconds))
     }
     override fun toString(): String {
         return this.plGroup.toString()

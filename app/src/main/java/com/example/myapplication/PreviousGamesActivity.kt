@@ -14,7 +14,7 @@ class PreviousGamesActivity : AppCompatActivity() {
 
         val btnBack: Button = findViewById(R.id.btnBackPreviousGames)
         btnBack.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, GroupInfoActivity::class.java)
             startActivity(intent)
         }
 

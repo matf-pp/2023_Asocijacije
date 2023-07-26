@@ -22,11 +22,6 @@ class RankingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val btnNewGame :Button = findViewById(R.id.btnNewGame)
-        btnNewGame.setOnClickListener {
-            val intent = Intent(this, GroupInfoActivity::class.java)
-            startActivity(intent)
-        }
 
         val tvRangList = findViewById<TextView>(R.id.tvRanking)
         val tvListOfPoints = findViewById<TextView>(R.id.tvListOfPoints)
@@ -41,13 +36,14 @@ class RankingActivity : AppCompatActivity() {
         text=""
         for(p in listOfPairs){
             num = DatabaseServiceProvider.db.getGame().pointsOfAPair(p)
+            if(num ==DatabaseServiceProvider.db.getGame().pointsOfAPair(listOfPairs.first()) )
+            //povecavanje broja pobjeda i mijenjanje baze
+                 winsIncrease(p)
             text = "$text \n $num"
         }
         tvListOfPoints.text = text
         //reset broja tacnih odgovora
         DatabaseServiceProvider.db.getGame().getPlayerGroup().resetAnswers()
-        //povecavanje broja pobjeda i mijenjanje baze
-        winsIncrease(listOfPairs.first())
         //mijenjanje baze
         mPlayerGroupViewModel = ViewModelProvider(this)[PlayerGroupViewModel::class.java]
         updatePlayGroup()
