@@ -25,12 +25,12 @@ class TimerActivity : AppCompatActivity() {
         var text = "FAZA $numOfPhase"
         tvNumberOfPhase.text = text
         text = if(numOfPhase == 1){
-            "verbalno objasnjavanje"
+            "slobodno objasnjavanje"
         }else{
             if(numOfPhase == 2){
-                "pantomima"
+                "jedna rec"
             }else{
-                "crtanje"
+                "pantomima"
             }
         }
         tvNameOfPhase.text = text

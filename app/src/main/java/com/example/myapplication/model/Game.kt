@@ -13,7 +13,7 @@ class Game : Serializable {
     private var currentGamePhase : Int = 1
     private var wordBank = mutableListOf<String>()
     private var currentWord : String = ""
-    private var timer : Int = 5//Resources.getSystem().getInteger(R.integer.DefaultSeconds).toInt()
+    private var timer : Int = 20//Resources.getSystem().getInteger(R.integer.DefaultSeconds).toInt()
 
     fun getPlayerGroup() : PlayerGroup {
         return plGroup
