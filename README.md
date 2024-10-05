@@ -1,59 +1,59 @@
 # 2023_Asocijacije
 
-# O aplikaciji
+# About application
 
-Android aplikacija za igranje igre "Asocijacije u 3 faze"
+Android application to play the game "Associations in 3 phases"
 
-## Korišćene tehonologije
+## Technologies used
 
-Aplikacija je rađena u programskom jeziku [Kotlin](https://kotlinlang.org/), u okruženju [Android Studio](https://developer.android.com/studio).
+The application was made in programming language [Kotlin](https://kotlinlang.org/), in the environment [Android Studio](https://developer.android.com/studio).
 
-## Opis igre
+## Game description
 
-**Postavka igre**
+**Setting up the game**
 
-Unesite ime koje želite da nosi Vaša grupa. Zatim unesite broj igrača koji Vaša grupa sadrži (mora da bude paran broj). Unesite imena članova grupe i zatim na početnom meniju izaberite ime Vaše grupe. Parovi su nasumično izabrani, ali imate slobodu da to promenite. Kada izaberete broj reči po igraču i broj sekundi za pogađanje, spremni ste za igru!
+Enter the name you want your group to bear. Then, enter the number of players your group contains (must be an even number). Enter the names of the group members and then select the name of your group on the home menu. Pairs are randomly selected, but you have the freedom to change it. Once you've selected the number of words per player and the number of seconds to guess, you're ready to play!
 
-**Unos reči**
+**Entering words**
 
-Na ekranu piše koji igrač unosi reči. Kada završi, daje telefon igraču čije ime piše na ekranu. Tek kada su svi igrači uneli reči, na ekranu će pisati koji igrač započinje igru.
+It says on the screen which player is entering the words. When they are done, they hand the phone to the next player, whose name will be written on the screen. Only when all players have entered the words, the screen will show which player starts the game.
 
-**Faze**
+**Phases**
 
-Faze se menjaju kada se objasne svi pojmovi.
+Phases change when all of the words are guessed.
 
-*Prva faza (Slobodno objašnjavanje)* - Igrač koji objašnjava može da priča partneru koliko god hoće o pojmu na ekranu.
+*Phase One (Free explanation)* - The explaining player can talk to their partner as much as they want about the concept on the screen.
 
-*Druga faza (Jedna reč)* - Igrač koji objašnjava sme da iskoristi samo jednu reč prilikom objašnjavanja nakon čega ne izgovara ništa dok partner ne pogodi pojam.
+*Phase Two (One word)* - The explaining player may only use one word when explaining, after which he does not say anything until his partner guesses the concept on the screen.
 
-*Treća faza (Pantomima)* - Igrač koji objašnjava pantomimom pokušava da objasni partneru dati pojam.
+*Phase Three (Charades)* - The explaining player tries to explain the given concept to the partner by pantomime.
 
-**Kraj igre**
+**Game ending**
 
-Nakon treće faze, pogođene reči se sabiraju po parovima i pobedio je onaj par koji ima najviše pogođenih pojmova.
+After the third phase, the guessed words are added up in pairs and the pair with the most guesses wins.
 
-## Instalacija
+## Installation
 
-Aplikaciju možete preuzeti [ovde](https://drive.google.com/drive/folders/1oNr7uWwlvGARSucjCQZoqWhaqXzQHBKQ).
+You can download the application [here](https://drive.google.com/drive/folders/1oNr7uWwlvGARSucjCQZoqWhaqXzQHBKQ).
 
 ---
 
-## Izgled aplikacije
+## Application layout
 
 
-Početni ekran              |  Biranje grupe           | Uparivanje               | Prethodne partije     |
+Home screen                | Selecting a group         | Pairing                 | Previous games        |
 :-------------------------:|:-------------------------:|:-----------------------:|:----------------------: 
 <img src='img/pocetni_ekran.jpg' width="150" /> | <img src="img/biranje_grupe.jpg" width="150" /> | <img src="img/uparivanje.jpg" width="150" /> | <img src="img/prethodne_partije.jpg" width="150" />
 
 
-Unos reči                  |  Igra                     | Rang lista             |
+Entering words             |  Game                     | Scoreboard           |
 :-------------------------:|:-------------------------:|:-----------------------: 
 <img src="img/unos_reci.jpg" width="150" /> | <img src="img/igra.jpg" width="150" /> | <img src="img/rang_lista.jpg" width="150" />
 
 
 ---
 
-### Autori projekta
+### Authors
 
 Vasilije Kostić - vasilije.kostic2001@gmail.com
 
